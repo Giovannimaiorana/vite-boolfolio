@@ -17,6 +17,11 @@ export default {
                     console.log(response);
                     this.projects = response.data.results;
                 });
+        },
+        troncateText(text) {
+            if (text && text.length > 10) {
+                return text.substr(0, 50) + `...`
+            }
         }
     },
     mounted() {
@@ -32,11 +37,19 @@ export default {
                 <div class="card mb-2" style="width: 18rem;">
                     <img v-if="project.preview_image" :src="`${this.baseUrl}/storage/${project.preview_image}`"
                         class="card-img-top" />
-                    <img v-else src="https://cdn.icon-icons.com/icons2/1462/PNG/512/120nophoto_100007.png"
+                    <img v-else src="http://www.tecno-store.it/wp-content/uploads/immagine-non-disponibile.png"
                         class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{ project.title }}</h5>
-                        <p class="card-text">{{ project.description }}</p>
+                        <p class="card-text">tecnologia: <br />
+                            <span v-for="technology in project.technologies">
+                                {{ technology?.name }}<br>
+                            </span>
+                        </p>
+                        <p class="card-text">tipo: <br />
+                            <span>{{ project.type?.name }}</span>
+                        </p>
+                        <p class="card-text">{{ troncateText(project.description) }}</p>
                         <a href="#" class="btn btn-primary">Visualizza altro</a>
                     </div>
                 </div>

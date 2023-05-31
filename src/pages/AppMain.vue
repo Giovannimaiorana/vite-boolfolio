@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-import AppProject from './AppProject.vue';
+import AppProject from '../components/AppProject.vue';
 import { store } from '../store.js';
 export default {
     name: "AppMain",

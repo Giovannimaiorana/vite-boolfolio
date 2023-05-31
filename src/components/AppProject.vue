@@ -1,4 +1,5 @@
 <script>
+import SingleProject from '../pages/SingleProject.vue';
 import { store } from '../store.js';
 export default {
     name: 'AppProject',
@@ -35,7 +36,9 @@ export default {
                 <span>{{ project.type?.name }}</span>
             </p>
             <p class="card-text">{{ troncateText(project.description) }}</p>
-            <a href="#" class="btn btn-primary">Visualizza altro</a>
+            <router-link :to="{ name: 'single-project', params: { id: project.id } }" class="btn btn-primary">
+                Vedi Post
+            </router-link>
         </div>
     </div>
 </template>

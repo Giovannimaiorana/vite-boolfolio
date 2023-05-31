@@ -33,9 +33,7 @@ export default {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
+
                     <li class="nav-item" v-for="item in menuItems">
 
                         <router-link :to="{ name: item.routeName }" class="nav-link active">{{ item.label }}</router-link>

@@ -1,9 +1,14 @@
 <script>
+import ContactForm from '../components/ContactForm.vue';
+
 export default {
-    name: 'AppContact',
+    name: "AppContact",
+    components: { ContactForm }
 }
 </script>
 
 <template>
-    <h1>Questa è il form di contatto</h1>
+    <div class="container">
+        <ContactForm />
+    </div>
 </template>

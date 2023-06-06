@@ -9,10 +9,14 @@ export default {
             name: '',
             email: '',
             message: '',
+            success: false,
+            sending: false,
         }
     },
     methods: {
         sendForm() {
+            this.success = false;
+            this.sending = true;
 
             axios.post(`${this.store.baseUrl}/api/contacts`,
                 {
@@ -20,7 +24,18 @@ export default {
                     email: this.email,
                     message: this.message,
                 }).then(response => {
-                    console.log(response);
+                    if (response.data.success) {
+                        //reset form
+                        this.name = '';
+                        this.email = '';
+                        this.message = '';
+                        this.success = true;
+                        this.sending = false;
+
+
+                    }
+                }).catch(error => {
+                    this.sending = false;
                 });
         }
     }
@@ -28,6 +43,9 @@ export default {
 </script>
 
 <template>
+    <div class="alert alert-success" role="alert" v-if="success">
+        Grazie per averci contattato
+    </div>
     <form @submit.prevent="sendForm()">
         <div class="mb-3">
             <label for="email" class="form-label">La tua Email</label>
@@ -41,7 +59,9 @@ export default {
             <label for="message">Il tuo messaggio</label>
             <textarea class="form-control" placeholder="Scrivi il tuo Messaggio" id="message" v-model="message"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Invia</button>
+        <button type="submit" class="btn btn-primary" :disabled="sending">
+            {{ sending ? 'Invio in corso...' : 'Invia Messaggio' }}
+        </button>
     </form>
 </template>
 
